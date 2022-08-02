@@ -1,6 +1,7 @@
 from django.db import models
 
 # Create your models here.
+# the default models are groups and users, Categories is created as a new custom model
 class Category(models.Model):
 # name of category
     category_name = models.CharField(max_length=50, unique=True)
@@ -9,6 +10,12 @@ class Category(models.Model):
 # description of the category_name, store category image if __name__ == '__main__':
     description = models.TextField(max_length=255, blank=True)
     cat_image = models.ImageField(upload_to='photos/categories/', blank=True)
+
+# class to change the name of category from categorys to categories
+    class Meta:
+        verbose_name = 'category'
+
+        verbose_name_plural = 'categories'
 
 def _str_(self):
     return self.category_name
