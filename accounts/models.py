@@ -1,9 +1,10 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+
 
 # Create your models here.
 # there are two model types created for user account manager and basemanager
-class MyAccountManager(BaseUserManager):
+class MyAccountManager(BaseUserManager, PermissionsMixin):
     # creating the normal user
     def create_user(self, first_name, last_name, username, email, password=None):
         #creating error logic for lack of email
@@ -23,12 +24,9 @@ class MyAccountManager(BaseUserManager):
         )
 
 
-
         user.set_password(password)
         user.save(using=self._db)
         return user
-
-
 
 
 # creating the super user
@@ -48,9 +46,12 @@ class MyAccountManager(BaseUserManager):
         user.save(using=self.db)
         return user
 
+    def has_module_perms(self, add_label):
+        return True
 
 
-# create account model and account manager
+
+# create account model to work on functions of user accounts
 class Account(AbstractBaseUser):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
