@@ -1,6 +1,6 @@
 from django.db import models
 from django.db.models.signals import pre_save
-from .models import MyModel  # or...
+from .models import models  # or...
 
 # Create your models here.
 # the default models are groups and users, Categories is created as a new custom model
