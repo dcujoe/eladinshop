@@ -1,6 +1,6 @@
 from django.db import models
 from django.db.models.signals import pre_save
-from .models import models  # or...
+
 
 # Create your models here.
 # the default models are groups and users, Categories is created as a new custom model
@@ -22,11 +22,3 @@ class Category(models.Model):
 def _str_(self):
     return self.category_name
 from django.db.models.signals import pre_save
-
-def ready(self):
-    # importing model classes
-
-    MyModel = self.get_model('MyModel')
-
-    # registering signals with the model's string label
-    pre_save.connect(receiver, sender='app_label.MyModel')
